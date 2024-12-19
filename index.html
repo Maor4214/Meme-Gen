@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme Me Up</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-logo">Meme me up</div>
+      <nav class="main-nav">
+        <ul class="flex clean-list align-center">
+          <li><a onclick="onOpenSection('gallery')">Gallery</a></li>
+          <li><a onclick="onOpenSection('random')">Randomize</a></li>
+          <li><a onclick="onOpenSection('saved')">Saved memes</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-content">
+      <section class="main-meme-gen">
+        <section class="canvas-container">
+          <canvas width="480" height="480"> </canvas>
+        </section>
+        <div class="tools-editor">
+          <input type="text" class="text-input" placeholder="Add text here" />
+          <button class="add-line-btn"></button>
+          <button class="move-line-btn"></button>
+          <button class="delete-line-btn"></button>
+        </div>
+        <div class="font-editor"></div>
+        <div class="share-options">
+          <button class="save">Save</button>
+          <button class="download">Download</button>
+          <button class="upload">Upload</button>
+          <button class="share">Share</button>
+        </div>
+      </section>
+      <section class="main-gallery"></section>
+      <section class="main-saved"></section>
+    </main>
+  </body>
+</html>
