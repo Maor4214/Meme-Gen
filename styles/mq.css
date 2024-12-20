@@ -1,0 +1,13 @@
+@media (max-width: 920px) {
+  body {
+  }
+}
+
+@media (min-width: 921px) {
+  body {
+  }
+  .meme-gen {
+    display: flex;
+    gap: 20px;
+  }
+}

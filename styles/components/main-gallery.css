@@ -1,0 +1,13 @@
+.main-gallery {
+  columns: 3;
+}
+
+.main-gallery img {
+  width: 100%;
+  margin-bottom: 12px;
+  /* break-inside: avoid; */
+}
+
+.upload-img {
+  cursor: pointer;
+}
