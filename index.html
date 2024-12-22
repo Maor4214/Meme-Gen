@@ -23,16 +23,16 @@
             <canvas width="480" height="480"> </canvas>
           </section>
           <div class="tools-editor">
-            <input type="text" class="text-input" placeholder="Add text here" />
+            <input type="text" class="text-input" placeholder="Add text here" oninput="onChangeTxt(this.value)" />
             <div class="line-optins">
             <button class="add-line-btn">+</button>
             <button class="move-line-btn">move</button>
             <button class="delete-line-btn">X</button>
           </div>
             <div class="font-editor">
-              <input type="color" onchange="onSetColor" />
-              <button>large font size</button>
-              <button>small font size</button>
+              <input type="color" oninput="onSetColor(this.value)" />
+              <button onclick="onChangeFont(2)">large font size</button>
+              <button onclick="onChangeFont(-2)">small font size</button>
               <button>alligin start</button>
               <button>alligin center</button>
               <button>alligin end</button>
@@ -68,8 +68,8 @@
       </section>
       <section class="main-saved"></section>
     </main>
-    <script src="js/util.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/Services/gallery.service.js"></script>
     <script src="js/Services/meme.service.js"></script>
     <script src="js/Controllers/gallery.controller.js"></script>

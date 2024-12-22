@@ -11,7 +11,7 @@ function renderGallery() {
   const elGallery = document.querySelector('.gallery')
   const strHtmls = imgs.map(
     (img) => `
-        <img onclick="onSetImg(event, ${img.id})" src="${img.imgUrl}" alt="${img.keywords[0]}">`
+        <img onclick="onSetImg(${img.id})" src="${img.imgUrl}" alt="${img.keywords[0]}">`
   )
   elGallery.innerHTML = strHtmls.join('')
 }
@@ -29,22 +29,25 @@ function onOpenGallery() {
   renderGallery()
 }
 
-function onSetImg(ev, imgIdx) {
-  console.log('img', ev, imgIdx)
+function onSetImg(imgIdx) {
+  console.log('img', imgIdx)
   const currImg = setImg(imgIdx)
-  const img = new Image()
-  console.log('img', currImg)
-  img.src = currImg.imgUrl
-  renderImg(img)
+  renderImg(currImg)
+  getMeme(currImg.imgUrl)
 }
 
 function onImgInput(ev) {
-  loadImage(ev, renderImg)
+  loadImage(ev, renderImgFromUser)
+  getMeme()
 }
 
-function renderImg(img) {
-  console.log('img', img)
-  onOpenRandomMeme()
+function renderImg(currImg) {
+  gMeme.selectedImgId = currImg.id
+  const img = new Image()
+  console.log('img', currImg)
+  img.src = currImg.imgUrl
+  console.log('img.src', img.src)
+  onOpenMeme()
   const gElCanvas = document.querySelector('canvas')
   const gCtx = gElCanvas.getContext('2d')
   gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
@@ -60,6 +63,18 @@ function loadImage(ev, onImageReady) {
       onImageReady(img)
     }
     img.src = event.target.result
+    gImgs.push(createImg(img.src, 'funny', true))
+    const imgIdx = gImgs.length - 1
+    gMeme.selectedImgId = gImgs[imgIdx].id
   }
   reader.readAsDataURL(ev.target.files[0])
+}
+
+function renderImgFromUser(img) {
+  console.log('img', img)
+  onOpenMeme()
+  const gElCanvas = document.querySelector('canvas')
+  const gCtx = gElCanvas.getContext('2d')
+  gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+  gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
