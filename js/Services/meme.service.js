@@ -2,47 +2,77 @@
 
 let gTxtFont = 'Ariel'
 let gTxtAlign = 'center'
+let gLineIdCount = 1
 
 let gMeme = {
-  selectedImgId: 5,
+  selectedImgId: 1,
   selectedLineIdx: 0,
   lines: [
     {
+      id: 1,
       txt: 'Add Text Here:',
       size: 40,
       color: '#000000',
+      x: 240,
+      y: 80,
     },
   ],
 }
+let gEditLines = gMeme.lines[0]
 
-let editLines = gMeme.lines[0]
-
-function getMeme(id = 6) {
-  const gElCanvas = document.querySelector('canvas')
-  console.log('id', id)
-  drawText(editLines.txt, gElCanvas.width / 2, gElCanvas.height / 4)
-}
+let gLinePos
 
 function drawText(text, x, y) {
-  console.log('text', text)
-  const gElCanvas = document.querySelector('canvas')
-  const gCtx = gElCanvas.getContext('2d')
-  console.log('gMeme.lines[0].color', editLines)
-  console.log('gMeme.lines[0].size', editLines.size)
+  console.log('gMeme.lines[0].color', gEditLines)
+  console.log('gMeme.lines[0].size', gEditLines.size)
   gCtx.lineWidth = 2
-  gCtx.strokeStyle = editLines.color
-  gCtx.fillStyle = editLines.color
-  gCtx.font = `${editLines.size}px ${gTxtFont}`
-  gCtx.textAlign = gTxtAlign
-  gCtx.textBaseline = 'middle'
+  gCtx.strokeStyle = gEditLines.color
+  gCtx.fillStyle = gEditLines.color
+  gCtx.font = `${gEditLines.size}px ${gTxtFont}`
+  gCtx.textAlign = `${gTxtAlign}`
+  gCtx.textBaseline = `${gTxtAlign}`
+  console.log('gTxtAlign', gTxtAlign)
 
   gCtx.fillText(text, x, y)
   gCtx.strokeText(text, x, y)
 }
 
 function renderMeme(imgId) {
-  const gElCanvas = document.querySelector('canvas')
   const currImg = setImg(imgId)
   renderImg(currImg)
-  drawText(editLines.txt, gElCanvas.width / 2, gElCanvas.height / 4)
+  drawText(gEditLines.txt, gMeme.lines[0].x, gMeme.lines[0].y)
+}
+
+function addLine() {
+  let newLine = _createLine()
+  console.log('newline', newLine)
+  gMeme.lines.push(newLine)
+}
+
+function _createLine() {
+  gLineIdCount++
+  return {
+    id: gLineIdCount,
+    txt: 'Add Text Here:',
+    size: 40,
+    color: '#000000',
+    x: 240,
+    y: 80,
+  }
+}
+
+function drawFrame(height, width, x, y) {
+  gCtx.strokeStyle = 'black'
+  gCtx.strokeRect(x, y, width, height)
+}
+
+function isTextCLicked(clickPos) {
+  const { pos } = gCircle
+  // Calc the distance between two dots
+  const distance = Math.sqrt(
+    (pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2
+  )
+  // console.log('distance', distance)
+  //If its smaller then the radius of the circle we are inside
+  return distance <= gCircle.size
 }

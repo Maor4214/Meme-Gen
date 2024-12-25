@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f4f4f9;
+  color: #333;
+  display: grid;
+  grid-template-columns: 10vw 80vw 10vw;
+  grid-auto-rows: max-content;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+body > * {
+  grid-column: 2;
+}
+
+.hidden {
+  display: none;
+}
+
+canvas {
+  border: 1px solid black;
+}

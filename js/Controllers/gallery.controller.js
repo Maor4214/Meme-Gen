@@ -29,18 +29,6 @@ function onOpenGallery() {
   renderGallery()
 }
 
-function onSetImg(imgIdx) {
-  console.log('img', imgIdx)
-  const currImg = setImg(imgIdx)
-  renderImg(currImg)
-  getMeme(currImg.imgUrl)
-}
-
-function onImgInput(ev) {
-  loadImage(ev, renderImgFromUser)
-  getMeme()
-}
-
 function renderImg(currImg) {
   gMeme.selectedImgId = currImg.id
   const img = new Image()
@@ -48,10 +36,20 @@ function renderImg(currImg) {
   img.src = currImg.imgUrl
   console.log('img.src', img.src)
   onOpenMeme()
-  const gElCanvas = document.querySelector('canvas')
-  const gCtx = gElCanvas.getContext('2d')
   gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function onSetImg(imgIdx) {
+  console.log('img', imgIdx)
+  const currImg = setImg(imgIdx)
+  renderImg(currImg)
+  drawText(gEditLines.txt, gMeme.lines[0].x, gMeme.lines[0].y)
+}
+
+function onImgInput(ev) {
+  loadImage(ev, renderImgFromUser)
+  getMeme()
 }
 
 function loadImage(ev, onImageReady) {
@@ -63,7 +61,7 @@ function loadImage(ev, onImageReady) {
       onImageReady(img)
     }
     img.src = event.target.result
-    gImgs.push(createImg(img.src, 'funny', true))
+    gImgs.push(_createImg(img.src, 'funny', true))
     const imgIdx = gImgs.length - 1
     gMeme.selectedImgId = gImgs[imgIdx].id
   }
@@ -73,8 +71,6 @@ function loadImage(ev, onImageReady) {
 function renderImgFromUser(img) {
   console.log('img', img)
   onOpenMeme()
-  const gElCanvas = document.querySelector('canvas')
-  const gCtx = gElCanvas.getContext('2d')
   gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }

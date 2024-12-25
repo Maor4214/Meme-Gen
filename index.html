@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="/css/main.css" />
     <title>Meme Me Up</title>
   </head>
   <body onload="onInit()">
@@ -25,27 +25,27 @@
           <div class="tools-editor">
             <input type="text" class="text-input" placeholder="Add text here" oninput="onChangeTxt(this.value)" />
             <div class="line-optins">
-            <button class="add-line-btn">+</button>
-            <button class="move-line-btn">move</button>
-            <button class="delete-line-btn">X</button>
+            <button class="add-line-btn" onclick="onAddLine()"><img src="imgs/add-icon.png" alt=""></button>
+            <button class="move-line-btn"><img src="imgs/movetxt-icon.png" alt=""></button>
+            <button class="delete-line-btn" onclick="onRemoveLine()"><img src="imgs/delete-icon.png" alt=""></button>
           </div>
             <div class="font-editor">
-              <input type="color" oninput="onSetColor(this.value)" />
-              <button onclick="onChangeFont(2)">large font size</button>
-              <button onclick="onChangeFont(-2)">small font size</button>
-              <button>alligin start</button>
-              <button>alligin center</button>
-              <button>alligin end</button>
-              <section custom-font>
-                <select>
-                  <option value="0">Arial</option>
-                  <option value="1">Verdana</option>
-                  <option value="2">Tahoma</option>
+              <input  class="color" type="color" oninput="onSetColor(this.value)" />
+              <button class="big-font" onclick="onChangeFont(2)"><img src="imgs/big.png" alt=""></button>
+              <button class="small-font" onclick="onChangeFont(-2)"><img src="imgs/small.png" alt=""></button>
+              <button class="start" onclick="onChangeAlign('right')"><img src="imgs/right.png" alt=""></button>
+              <button class="center" onclick="onChangeAlign('center')"><img src="imgs/center.png" alt=""></button>
+              <button class="end" onclick="onChangeAlign('left')"><img src="imgs/left.png" alt=""></button>
+              <section custom-font class="font">
+                <select onchange="onChangeFont(this.value)">
+                  <option value="arial">Arial</option>
+                  <option value="verdana">Verdana</option>
+                  <option value="tahoma">Tahoma</option>
                 </select>
             </div>
             <div class="share-options">
               <button class="save">Save</button>
-              <button class="download">Download</button>
+              <button><a href="#" onclick="onDownload(this)" download="Your Meme">Download</a></button>
               <button class="upload">Upload</button>
               </section>
             </div>
@@ -68,11 +68,11 @@
       </section>
       <section class="main-saved"></section>
     </main>
-    <script src="js/main.js"></script>
     <script src="js/util.js"></script>
     <script src="js/Services/gallery.service.js"></script>
     <script src="js/Services/meme.service.js"></script>
     <script src="js/Controllers/gallery.controller.js"></script>
     <script src="js/Controllers/meme.controller.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

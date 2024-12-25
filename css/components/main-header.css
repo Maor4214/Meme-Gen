@@ -1,0 +1,74 @@
+header {
+  background: linear-gradient(to left, #401f71, #824d74);
+  color: #f5e8dd;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.main-nav {
+  color: #f5e8dd;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.main-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav a {
+  color: #f5e8dd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+  color: #0e0e4b;
+}
+.main-gallery {
+  columns: 3;
+  column-gap: 1rem;
+  margin-top: 20px;
+}
+
+.main-gallery img {
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.upload-img img {
+  width: 100px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.upload-img img:hover {
+  opacity: 0.8;
+}
+
+.main-nav a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #fdaf7b;
+}

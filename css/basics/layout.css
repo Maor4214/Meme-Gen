@@ -1,9 +1,13 @@
 body {
   display: grid;
-  grid-template-columns: 10vw 80vw 10vw;
+  grid-template-columns: 20vw 60vwthat 20vw;
   grid-auto-rows: max-content;
 }
 
 body > * {
   grid-column: 2;
+}
+
+.meme-gen {
+  justify-content: center;
 }
