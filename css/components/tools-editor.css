@@ -16,9 +16,9 @@
 }
 
 button {
-  background: #fdaf7b;
-  color: #333;
-  border: 1px solid #be7b72;
+  background: #eeeeee;
+  color: black;
+  border: 1px solid #76abae;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
@@ -26,7 +26,7 @@ button {
 }
 
 button:hover {
-  background: #fdaf7b;
+  background: #31363f;
   transform: translateY(-2px);
 }
 

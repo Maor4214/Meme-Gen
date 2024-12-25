@@ -1,5 +1,5 @@
 header {
-  background: linear-gradient(to left, #401f71, #824d74);
+  background: linear-gradient(to left, #222831, #31363f);
   color: #f5e8dd;
   display: grid;
   grid-template-columns: 1fr auto;
@@ -70,5 +70,5 @@ header {
 .main-nav a:hover {
   cursor: pointer;
   text-decoration: underline;
-  color: #fdaf7b;
+  color: #eeeeee;
 }
