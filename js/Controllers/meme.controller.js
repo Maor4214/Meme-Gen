@@ -11,6 +11,7 @@ function onOpenMeme() {
 }
 
 function onRandomizeMeme() {
+  if (gUserOnPhone) onToggleMenu()
   RandomizeMeme()
   onOpenMeme()
 }
@@ -25,6 +26,7 @@ function onChangeTxt(text) {
 function onChangeFontSize(num) {
   console.log('changing size', num)
   gEditLines[gSelectedLineIdx].size += num
+  drawText
   renderMeme(gMeme.selectedImgId)
 }
 
@@ -56,6 +58,29 @@ function addTouchListeners() {
 //   drawFrame(textHeight, textWidth, x, y, textHeight, textWidth)
 // }
 
+function onDown(ev) {
+  const rect = gElCanvas.getBoundingClientRect()
+
+  const clientX = isTouchEvent(ev) ? ev.touches[0].clientX : ev.clientX
+  const clientY = isTouchEvent(ev) ? ev.touches[0].clientY : ev.clientY
+
+  const clickX = clientX - rect.left
+  const clickY = clientY - rect.top
+
+  const textHeight = 20
+  const clickedLine = isClickedLine(clickX, clickY, textHeight)
+
+  if (!clickedLine) return
+
+  console.log('gSelectedLineIdx', gSelectedLineIdx)
+  const lineIdx = getLineById(clickedLine.id)
+  gSelectedLineIdx = lineIdx.id
+
+  console.log('gSelectedLineIdx', gSelectedLineIdx)
+  gIsMovingText = true
+  gElCanvas.style.cursor = 'grabbing'
+}
+
 function isClickedLine(clickX, clickY, textHeight) {
   const clickedLine = gMeme.lines.filter(({ txt, x, y }) => {
     const textWidth = gCtx.measureText(txt).width
@@ -70,28 +95,21 @@ function isClickedLine(clickX, clickY, textHeight) {
   return clickedLine[0]
 }
 
-function onDown(ev) {
-  const rect = gElCanvas.getBoundingClientRect()
-  const clickX = ev.clientX - rect.left
-  const clickY = ev.clientY - rect.top
-  const textHeight = 20
-  const clickedLine = isClickedLine(clickX, clickY, textHeight)
-  if (!clickedLine) return
-  console.log('gSelectedLineIdx', gSelectedLineIdx)
-  const lineIdx = getLineById(clickedLine.id)
-  gSelectedLineIdx = lineIdx.id
-  console.log('gSelectedLineIdx', gSelectedLineIdx)
-  gIsMovingText = true
-  gElCanvas.style.cursor = 'grabbing'
-}
-
 function onMove(ev) {
   if (!gIsMovingText) return
-  gMeme.lines[gSelectedLineIdx].x = ev.offsetX
-  gMeme.lines[gSelectedLineIdx].y = ev.offsetY
+
+  const offsetX = isTouchEvent(ev)
+    ? ev.touches[0].clientX - gElCanvas.getBoundingClientRect().left
+    : ev.offsetX
+  const offsetY = isTouchEvent(ev)
+    ? ev.touches[0].clientY - gElCanvas.getBoundingClientRect().top
+    : ev.offsetY
+
+  gMeme.lines[gSelectedLineIdx].x = offsetX
+  gMeme.lines[gSelectedLineIdx].y = offsetY
+
   renderMeme(gMeme.selectedImgId)
 }
-
 function onUp() {
   gIsMovingText = false
   gElCanvas.style.cursor = 'default'
@@ -158,21 +176,7 @@ function onRemoveLine() {
   console.log('removing line')
   deleteLine()
 }
-// function getEvPos(ev) {
-//   let pos = {
-//     x: ev.offsetX,
-//     y: ev.offsetY,
-//   }
 
-//   if (TOUCH_EVS.includes(ev.type)) {
-//     ev.preventDefault()
-
-//     ev = ev.changedTouches[0]
-
-//     pos = {
-//       x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-//       y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
-//     }
-//   }
-//   return pos
-// }
+function isTouchEvent(ev) {
+  return TOUCH_EVS.includes(ev.type)
+}

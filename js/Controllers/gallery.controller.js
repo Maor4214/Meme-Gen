@@ -22,6 +22,7 @@ function makeSectionInvisible() {
 }
 
 function onOpenGallery() {
+  if (gUserOnPhone) onToggleMenu()
   document.querySelector('.main-meme-gen').classList.add('hidden')
   document.querySelector('.main-saved').classList.add('hidden')
   document.querySelector('.main-gallery').classList.remove('hidden')

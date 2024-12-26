@@ -2,6 +2,7 @@
 
 let gElCanvas
 let gCtx
+let gUserOnPhone = false
 
 function onInit() {
   gElCanvas = document.querySelector('canvas')
@@ -26,4 +27,9 @@ function resizeCanvas() {
 function addListeners() {
   addMouseListeners()
   addTouchListeners()
+}
+
+function onToggleMenu() {
+  gUserOnPhone = true
+  document.body.classList.toggle('menu-open')
 }

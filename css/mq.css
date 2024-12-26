@@ -1,10 +1,145 @@
 @media (max-width: 920px) {
-  body {
+  header {
+    position: fixed;
+    width: 100%;
+    box-shadow: none;
+    z-index: 1;
+    margin-bottom: 5em;
   }
+
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    background-color: rgb(34, 40, 49);
+    color: black;
+    min-width: 200px;
+
+    transition: transform 0.6s;
+  }
+
+  body:not(.menu-open) .main-nav {
+    transform: translateX(100%);
+  }
+
+  .main-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    margin-top: 0.5em;
+  }
+
+  .main-nav > ul > li {
+    display: grid;
+    place-items: center;
+  }
+  body:not(.menu-open) .main-nav {
+    transform: translateX(100%);
+  }
+
+  main {
+    margin-top: 5em;
+  }
+  .btn-toggle-menu:hover {
+    background-color: whitesmoke;
+  }
+  .main-nav a {
+    color: whitesmoke;
+  }
+
+  /* .main-nav a:hover {
+    color: whitesmoke;
+  } */
 }
 
 @media (min-width: 921px) {
-  body {
+  .main-nav {
+    color: #f5e8dd;
+  }
+
+  .header-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .main-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-nav a {
+    color: #f5e8dd;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .main-nav a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #eeeeee;
+  }
+
+  .font-editor {
+    border: 20px solid #31363f;
+    border-radius: 12px;
+    background-color: #31363f;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+    grid-template-areas:
+      'smaller bigger end center start'
+      'fontxt fontxt fontxt fontxt color';
+  }
+
+  .font-editor .color {
+    grid-area: color;
+    justify-self: stretch;
+    width: 100%;
+    height: 30px;
+  }
+
+  .font-editor .big-font {
+    grid-area: bigger;
+  }
+
+  .font-editor .small-font {
+    grid-area: smaller;
+  }
+
+  .font-editor .start {
+    grid-area: start;
+  }
+
+  .font-editor .center {
+    grid-area: center;
+  }
+
+  .font-editor .end {
+    grid-area: end;
+  }
+
+  .font-editor .font {
+    grid-area: fontxt;
+    width: 100%;
+  }
+
+  .font-editor .font select {
+    width: 100%;
+    height: 30px;
+  }
+
+  .font-editor img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .btn-toggle-menu {
+    display: none;
   }
   .meme-gen {
     display: flex;

@@ -35,12 +35,13 @@ button:hover {
 }
 
 .font-editor {
-  border: 20px solid #31363f;
+  border: 2rem solid #31363f;
   border-radius: 12px;
   background-color: #31363f;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 5px;
+  justify-content: center;
   grid-template-areas:
     'smaller bigger end center start'
     'fontxt fontxt fontxt fontxt color';
@@ -75,7 +76,7 @@ button:hover {
 
 .font-editor .font {
   grid-area: fontxt;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .font-editor .font select {
@@ -94,8 +95,8 @@ button:hover {
 }
 
 .font-editor img {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 .share-options button {

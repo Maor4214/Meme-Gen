@@ -1,6 +1,6 @@
 body {
   display: grid;
-  grid-template-columns: 20vw 60vwthat 20vw;
+  grid-template-columns: 10vw 80vw 10vw;
   grid-auto-rows: max-content;
 }
 
