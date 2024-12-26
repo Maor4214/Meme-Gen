@@ -16,6 +16,7 @@ body {
 
 body > * {
   grid-column: 2;
+  touch-action: none;
 }
 
 .hidden {
