@@ -36,38 +36,6 @@ header {
 }
 
 .main-nav a:hover {
-  text-decoration: underline;
-  color: #0e0e4b;
-}
-.main-gallery {
-  columns: 3;
-  column-gap: 1rem;
-  margin-top: 20px;
-}
-
-.main-gallery img {
-  width: 100%;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.main-gallery img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.upload-img img {
-  width: 100px;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-
-.upload-img img:hover {
-  opacity: 0.8;
-}
-
-.main-nav a:hover {
   cursor: pointer;
   text-decoration: underline;
   color: #eeeeee;

@@ -10,6 +10,11 @@ function onOpenMeme() {
   document.querySelector('.main-gallery').classList.add('hidden')
 }
 
+function onRandomizeMeme() {
+  RandomizeMeme()
+  onOpenMeme()
+}
+
 function onChangeTxt(text) {
   // const gElCanvas = document.querySelector('canvas')
   gEditLines.txt = text
@@ -17,7 +22,8 @@ function onChangeTxt(text) {
   // drawText(gMeme.lines[0].txt, gElCanvas.width / 2, gElCanvas.height / 4)
 }
 
-function onChangeFont(num) {
+function onChangeFontSize(num) {
+  console.log('changing size', num)
   gEditLines.size += num
   renderMeme(gMeme.selectedImgId)
 }
@@ -93,10 +99,10 @@ function onDrawNewTxt() {
 
 function onDownload(elLink) {
   const dataUrl = gElCanvas.toDataURL()
-  console.log('dataUrl', dataUrl)
+  // console.log('dataUrl', dataUrl)
 
   elLink.href = dataUrl
-  console.log('elLink.href', elLink.href)
+  // console.log('elLink.href', elLink.href)
 
   elLink.download = 'BEST MEME EVER'
 }

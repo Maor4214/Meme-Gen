@@ -7,11 +7,11 @@
   </head>
   <body onload="onInit()">
     <header>
-      <div class="header-logo">Meme me up</div>
+      <div class="header-logo">Meme Me Up</div>
       <nav class="main-nav">
         <ul class="clean-list">
           <li><a onclick="onOpenGallery()">Gallery</a></li>
-          <li><a onclick="onOpenRandomMeme()">Randomize</a></li>
+          <li><a onclick="onRandomizeMeme()">Randomize</a></li>
           <li><a onclick="onOpenSavedMemes()">Saved memes</a></li>
         </ul>
       </nav>
@@ -19,9 +19,9 @@
     <main class="main-content">
       <section class="main-meme-gen">
         <div class="meme-gen">
-          <section class="canvas-container">
+          <div class="canvas-container">
             <canvas width="480" height="480"> </canvas>
-          </section>
+          </div>
           <div class="tools-editor">
             <input type="text" class="text-input" placeholder="Add text here" oninput="onChangeTxt(this.value)" />
             <div class="line-optins">
@@ -31,8 +31,8 @@
           </div>
             <div class="font-editor">
               <input  class="color" type="color" oninput="onSetColor(this.value)" />
-              <button class="big-font" onclick="onChangeFont(2)"><img src="imgs/big.png" alt=""></button>
-              <button class="small-font" onclick="onChangeFont(-2)"><img src="imgs/small.png" alt=""></button>
+              <button class="big-font" onclick="onChangeFontSize(2)"><img src="imgs/big.png" alt=""></button>
+              <button class="small-font" onclick="onChangeFontSize(-2)"><img src="imgs/small.png" alt=""></button>
               <button class="start" onclick="onChangeAlign('right')"><img src="imgs/right.png" alt=""></button>
               <button class="center" onclick="onChangeAlign('center')"><img src="imgs/center.png" alt=""></button>
               <button class="end" onclick="onChangeAlign('left')"><img src="imgs/left.png" alt=""></button>
@@ -45,7 +45,7 @@
             </div>
             <div class="share-options">
               <button class="save">Save</button>
-              <button><a href="#" onclick="onDownload(this)" download="Your Meme">Download</a></button>
+              <button><a class="download-btn" href="#" onclick="onDownload(this)" download="Your Meme">Download</a></button>
               <button class="upload">Upload</button>
               </section>
             </div>

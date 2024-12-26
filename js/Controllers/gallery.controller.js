@@ -32,17 +32,18 @@ function onOpenGallery() {
 function renderImg(currImg) {
   gMeme.selectedImgId = currImg.id
   const img = new Image()
-  console.log('img', currImg)
+  // console.log('img', currImg)
   img.src = currImg.imgUrl
-  console.log('img.src', img.src)
+  // console.log('img.src', img.src)
   onOpenMeme()
   gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
 function onSetImg(imgIdx) {
-  console.log('img', imgIdx)
+  // console.log('img', imgIdx)
   const currImg = setImg(imgIdx)
+  resizeCanvas()
   renderImg(currImg)
   drawText(gEditLines.txt, gMeme.lines[0].x, gMeme.lines[0].y)
 }
@@ -69,7 +70,7 @@ function loadImage(ev, onImageReady) {
 }
 
 function renderImgFromUser(img) {
-  console.log('img', img)
+  // console.log('img', img)
   onOpenMeme()
   gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
