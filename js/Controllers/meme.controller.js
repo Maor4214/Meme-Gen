@@ -59,6 +59,7 @@ function addTouchListeners() {
 // }
 
 function onDown(ev) {
+  ev.preventDefault()
   const rect = gElCanvas.getBoundingClientRect()
 
   const clientX = isTouchEvent(ev) ? ev.touches[0].clientX : ev.clientX
