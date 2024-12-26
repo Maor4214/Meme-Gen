@@ -50,9 +50,11 @@ function onSetImg(imgIdx, txt) {
 }
 
 function onImgInput(ev) {
-  loadImage(ev, renderImgFromUser)
   createMemeLine()
-  drawText()
+  loadImage(ev, renderImgFromUser)
+  setTimeout(() => {
+    drawText()
+  }, 30)
 }
 
 function loadImage(ev, onImageReady) {

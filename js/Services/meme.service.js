@@ -1,7 +1,5 @@
 'use strict'
 
-let gTxtFont = 'Ariel'
-let gTxtAlign = 'center'
 let gLineIdCount = 0
 let gSelectedLineIdx = 0
 

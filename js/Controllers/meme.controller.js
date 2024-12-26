@@ -83,7 +83,6 @@ function onDown(ev) {
   console.log('gSelectedLineIdx', gSelectedLineIdx)
   gIsMovingText = true
   gElCanvas.style.cursor = 'grabbing'
-  drawFrame(clickedLine)
 }
 
 function onMove(ev) {
