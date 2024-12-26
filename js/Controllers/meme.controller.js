@@ -17,19 +17,19 @@ function onRandomizeMeme() {
 
 function onChangeTxt(text) {
   // const gElCanvas = document.querySelector('canvas')
-  gEditLines.txt = text
+  gEditLines[gSelectedLineIdx].txt = text
   renderMeme(gMeme.selectedImgId)
   // drawText(gMeme.lines[0].txt, gElCanvas.width / 2, gElCanvas.height / 4)
 }
 
 function onChangeFontSize(num) {
   console.log('changing size', num)
-  gEditLines.size += num
+  gEditLines[gSelectedLineIdx].size += num
   renderMeme(gMeme.selectedImgId)
 }
 
 function onSetColor(color) {
-  gEditLines.color = color
+  gEditLines[gSelectedLineIdx].color = color
   renderMeme(gMeme.selectedImgId)
 }
 
@@ -75,16 +75,21 @@ function onDown(ev) {
   const clickX = ev.clientX - rect.left
   const clickY = ev.clientY - rect.top
   const textHeight = 20
-  const test = isClickedLine(clickX, clickY, textHeight)
-  if (!test) return
+  const clickedLine = isClickedLine(clickX, clickY, textHeight)
+  if (!clickedLine) return
+  console.log('gSelectedLineIdx', gSelectedLineIdx)
+  const lineIdx = getLineById(clickedLine.id)
+  gSelectedLineIdx = lineIdx.id
+  console.log('gSelectedLineIdx', gSelectedLineIdx)
   gIsMovingText = true
   gElCanvas.style.cursor = 'grabbing'
+  drawFrame(clickedLine)
 }
 
 function onMove(ev) {
   if (!gIsMovingText) return
-  gMeme.lines[0].x = ev.offsetX
-  gMeme.lines[0].y = ev.offsetY
+  gMeme.lines[gSelectedLineIdx].x = ev.offsetX
+  gMeme.lines[gSelectedLineIdx].y = ev.offsetY
   renderMeme(gMeme.selectedImgId)
 }
 
@@ -93,9 +98,9 @@ function onUp() {
   gElCanvas.style.cursor = 'default'
 }
 
-function onDrawNewTxt() {
-  Draw
-}
+// function onDrawNewTxt() {
+//   Draw
+// }
 
 function onDownload(elLink) {
   const dataUrl = gElCanvas.toDataURL()
@@ -129,19 +134,19 @@ function onUploadImg(ev) {
 function onChangeAlign(align) {
   switch (align) {
     case 'right':
-      gTxtAlign = 'right'
+      gEditLines[gSelectedLineIdx].align = 'right'
       break
     case 'center':
-      gTxtAlign = 'center'
+      gEditLines[gSelectedLineIdx].align = 'center'
       break
     case 'left':
-      gTxtAlign = 'left'
+      gEditLines[gSelectedLineIdx].align = 'left'
   }
   renderMeme(gMeme.selectedImgId)
 }
 
 function onChangeFont(font) {
-  gTxtFont = font
+  gEditLines[gSelectedLineIdx].font = font
   renderMeme(gMeme.selectedImgId)
 }
 
@@ -152,6 +157,7 @@ function onAddLine() {
 
 function onRemoveLine() {
   console.log('removing line')
+  deleteLine()
 }
 // function getEvPos(ev) {
 //   let pos = {

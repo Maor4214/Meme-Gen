@@ -2,25 +2,14 @@
 
 let gTxtFont = 'Ariel'
 let gTxtAlign = 'center'
-let gLineIdCount = 1
+let gLineIdCount = 0
+let gSelectedLineIdx = 0
 
 let gMeme = {
   selectedImgId: 1,
-  selectedLineIdx: 0,
-  lines: [
-    {
-      id: 1,
-      txt: 'Add Text Here:',
-      size: 40,
-      color: '#000000',
-      x: 240,
-      y: 80,
-    },
-  ],
+  lines: [{}],
 }
-let gEditLines = gMeme.lines[0]
-
-let gLinePos
+let gEditLines = gMeme.lines
 
 const RANDOMTEXT = [
   'When food is life.',
@@ -35,31 +24,36 @@ const RANDOMTEXT = [
   'Me? Overthink? Never!',
 ]
 
-function drawText(text, x, y) {
-  // console.log('gMeme.lines[0].color', gEditLines)
-  // console.log('gMeme.lines[0].size', gEditLines.size)
-  gCtx.lineWidth = 2
-  gCtx.strokeStyle = gEditLines.color
-  gCtx.fillStyle = gEditLines.color
-  gCtx.font = `${gEditLines.size}px ${gTxtFont}`
-  gCtx.textAlign = `${gTxtAlign}`
-  gCtx.textBaseline = `${gTxtAlign}`
-  // console.log('gTxtAlign', gTxtAlign)
-
-  gCtx.fillText(text, x, y)
-  gCtx.strokeText(text, x, y)
+function createMemeLine(txt = 'Add Text Here:') {
+  return (gMeme.lines[0] = {
+    id: 0,
+    txt,
+    size: 40,
+    color: '#000000',
+    x: 240,
+    y: 80,
+    align: 'center',
+    font: 'Ariel',
+  })
 }
 
 function renderMeme(imgId) {
   const currImg = setImg(imgId)
   renderImg(currImg)
-  drawText(gEditLines.txt, gMeme.lines[0].x, gMeme.lines[0].y)
+  drawText()
+  if (gIsMovingText) drawFrame(gEditLines[gSelectedLineIdx])
 }
 
 function addLine() {
   let newLine = _createLine()
   // console.log('newline', newLine)
   gMeme.lines.push(newLine)
+  drawText()
+}
+
+function deleteLine() {
+  delete gEditLines[gSelectedLineIdx]
+  renderMeme(gMeme.selectedImgId)
 }
 
 function _createLine() {
@@ -71,12 +65,28 @@ function _createLine() {
     color: '#000000',
     x: 240,
     y: 80,
+    align: 'center',
+    font: 'Ariel',
   }
 }
 
-function drawFrame(height, width, x, y) {
+function drawFrame(line) {
+  const textWidth = gCtx.measureText(line.txt).width
+  const textHeight = 20
+  const padding = 10
+
+  gCtx.beginPath()
   gCtx.strokeStyle = 'black'
-  gCtx.strokeRect(x, y, width, height)
+  gCtx.lineWidth = 2
+
+  gCtx.strokeRect(
+    line.x - textWidth / 2 - padding,
+    line.y - textHeight - padding,
+    textWidth + padding * 2,
+    textHeight + padding
+  )
+
+  gCtx.closePath()
 }
 
 // function isTextCLicked(clickPos) {
@@ -93,6 +103,28 @@ function drawFrame(height, width, x, y) {
 function RandomizeMeme() {
   const randomImgId = getRandomInt(1, gImgs.length)
   const randomTextId = getRandomInt(0, RANDOMTEXT.length)
-  gEditLines.txt = RANDOMTEXT[randomTextId]
-  onSetImg(randomImgId)
+  if (!gEditLines[0]) createMemeLine()
+  const randomText = (gEditLines[0].txt = RANDOMTEXT[randomTextId])
+  onSetImg(randomImgId, randomText)
+}
+
+function drawText() {
+  for (var i = 0; i < gMeme.lines.length; i++) {
+    if (!gEditLines[i]) continue
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = gEditLines[i].color
+    gCtx.fillStyle = gEditLines[i].color
+    gCtx.font = `${gEditLines[i].size}px ${gEditLines[i].font}`
+    gCtx.textAlign = `${gEditLines[i].align}`
+    gCtx.textBaseline = `${gEditLines[i].align}`
+    // console.log('gTxtAlign', gTxtAlign)
+
+    gCtx.fillText(gEditLines[i].txt, gEditLines[i].x, gEditLines[i].y)
+    gCtx.strokeText(gEditLines[i].txt, gEditLines[i].x, gEditLines[i].y)
+  }
+}
+
+function getLineById(lineId) {
+  const lineIdx = gMeme.lines.find((line) => line && line.id === lineId)
+  return lineIdx
 }

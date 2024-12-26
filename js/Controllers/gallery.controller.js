@@ -40,17 +40,19 @@ function renderImg(currImg) {
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function onSetImg(imgIdx) {
+function onSetImg(imgIdx, txt) {
   // console.log('img', imgIdx)
   const currImg = setImg(imgIdx)
   resizeCanvas()
+  createMemeLine(txt)
   renderImg(currImg)
-  drawText(gEditLines.txt, gMeme.lines[0].x, gMeme.lines[0].y)
+  drawText()
 }
 
 function onImgInput(ev) {
   loadImage(ev, renderImgFromUser)
-  getMeme()
+  createMemeLine()
+  drawText()
 }
 
 function loadImage(ev, onImageReady) {
