@@ -37,6 +37,7 @@ function renderImg(currImg) {
   img.src = currImg.imgUrl
   // console.log('img.src', img.src)
   onOpenMeme()
+  resizeCanvas()
   gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
@@ -44,7 +45,6 @@ function renderImg(currImg) {
 function onSetImg(imgIdx, txt) {
   // console.log('img', imgIdx)
   const currImg = setImg(imgIdx)
-  resizeCanvas()
   createMemeLine(txt)
   renderImg(currImg)
   drawText()
@@ -77,6 +77,7 @@ function loadImage(ev, onImageReady) {
 function renderImgFromUser(img) {
   // console.log('img', img)
   onOpenMeme()
+  resizeCanvas()
   gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }

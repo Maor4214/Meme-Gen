@@ -10,7 +10,6 @@ function onInit() {
   renderGallery()
   makeSectionInvisible()
   addListeners()
-  resizeCanvas()
 
   window.addEventListener('resize', () => {
     resizeCanvas()

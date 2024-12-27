@@ -16,7 +16,6 @@ body {
 
 body > * {
   grid-column: 2;
-  touch-action: none;
 }
 
 .hidden {
@@ -29,4 +28,13 @@ canvas {
 
 .canvas-container {
   width: 80vw;
+  touch-action: none;
+}
+
+input {
+  touch-action: manipulation;
+}
+
+.text-input {
+  touch-action: manipulation;
 }
