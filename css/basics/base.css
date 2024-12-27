@@ -36,5 +36,5 @@ input {
 }
 
 .text-input {
-  touch-action: manipulation;
+  touch-action: none;
 }
