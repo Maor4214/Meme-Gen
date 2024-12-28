@@ -46,9 +46,9 @@
                 </select>
             </div>
             <div class="share-options">
-              <button class="save">Save</button>
+              <button class="save" onclick="onSaveToStorage()">Save</button>
               <button><a class="download-btn" href="#" onclick="onDownload(this)" download="Your Meme">Download</a></button>
-              <button class="upload">Upload</button>
+              <button class="upload" onclick="onUploadImg(event)">Upload</button>
               </section>
             </div>
           </div>
@@ -68,9 +68,14 @@
 
         <div class="gallery"></div>
       </section>
-      <section class="main-saved"></section>
+      <section class="main-saved">
+        <div class="saved-memes"></div>
+      </section>
+      <dialog class="modal"></dialog>
     </main>
     <script src="js/util.js"></script>
+    <script src="js/upload.service.js"></script>
+    <script src="js/storage.service.js"></script>
     <script src="js/Services/gallery.service.js"></script>
     <script src="js/Services/meme.service.js"></script>
     <script src="js/Controllers/gallery.controller.js"></script>

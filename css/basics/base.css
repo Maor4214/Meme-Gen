@@ -38,3 +38,15 @@ input {
 .text-input {
   touch-action: none;
 }
+
+.modal {
+  position: relative;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: -1px;
+  right: 0px;
+  border-radius: 50%;
+}

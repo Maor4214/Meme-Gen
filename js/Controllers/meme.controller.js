@@ -47,17 +47,6 @@ function addTouchListeners() {
   gElCanvas.addEventListener('touchend', onUp)
 }
 
-// function onClickCanvas(ev) {
-//   const rect = gElCanvas.getBoundingClientRect()
-//   const clickX = ev.clientX - rect.left
-//   const clickY = ev.clientY - rect.top
-//   const textHeight = 20
-//   const test = isClickedLine(clickX, clickY, textHeight)
-//   if (test) gIsMovingText = true
-//   console.log('hello')
-//   drawFrame(textHeight, textWidth, x, y, textHeight, textWidth)
-// }
-
 function onDown(ev) {
   ev.preventDefault()
   const rect = gElCanvas.getBoundingClientRect()
@@ -116,10 +105,6 @@ function onUp() {
   gElCanvas.style.cursor = 'default'
 }
 
-// function onDrawNewTxt() {
-//   Draw
-// }
-
 function onDownload(elLink) {
   const dataUrl = gElCanvas.toDataURL()
   // console.log('dataUrl', dataUrl)
@@ -143,10 +128,18 @@ function onUploadImg(ev) {
         <button class="btn-facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}')">
            Share on Facebook  
         </button>
+         <button class="btn-whatsapp" target="_blank" onclick="window.open('https://api.whatsapp.com/send?text=${encodedUploadedImgUrl}')">
+           Share on WhatsApp  
+        </button>
         <button class="close-btn"  onclick="onCloseModal()">X</button>`
     elModal.showModal()
   }
   uploadImg(canvasData, onSuccess)
+}
+
+function onCloseModal() {
+  const elModal = document.querySelector('.modal')
+  elModal.close()
 }
 
 function onChangeAlign(align) {
@@ -180,4 +173,42 @@ function onRemoveLine() {
 
 function isTouchEvent(ev) {
   return TOUCH_EVS.includes(ev.type)
+}
+
+function onSaveToStorage() {
+  saveMemeToStorage()
+}
+
+function onOpenSavedMemes() {
+  const savedMemes = loadSavedMemes()
+  document.querySelector('.main-meme-gen').classList.add('hidden')
+  document.querySelector('.main-saved').classList.remove('hidden')
+  document.querySelector('.main-gallery').classList.add('hidden')
+  if (!savedMemes[0]) renderMsg()
+  else renderSavedMemes()
+}
+
+function renderMsg() {
+  const elModal = document.querySelector('.modal')
+  elModal.innerHTML = `
+      <p>You havent saved memes yet, create some funny memes to save and find them here!</p>
+       <button class="close-btn"  onclick="onCloseModal()">X</button>
+       <button  onclick="openGallery()">Click here to move to Gallery</button>`
+  elModal.showModal()
+}
+
+function renderSavedMemes() {
+  const savedMemes = loadSavedMemes()
+  const memes = savedMemes
+  const elSavedMemes = document.querySelector('.saved-memes')
+  const strHtmls = memes.map(
+    (meme) => `
+          <img onclick="onSetImg(${meme.id})" src="${meme.image}">`
+  )
+  elSavedMemes.innerHTML = strHtmls.join('')
+}
+
+function openGallery() {
+  onCloseModal()
+  onOpenGallery()
 }

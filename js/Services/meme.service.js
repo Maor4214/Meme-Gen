@@ -126,3 +126,7 @@ function getLineById(lineId) {
   const lineIdx = gMeme.lines.find((line) => line && line.id === lineId)
   return lineIdx
 }
+
+function saveMemeToStorage() {
+  saveMeme()
+}
